@@ -12,7 +12,7 @@
             <div class="col-lg-6" style="margin-top:50px">
                 <h2>User Registration Page</h2>
                 <hr>
-                <form action="{{ route('auth.create') }}" method="POST">
+                <form action="{{ route('auth.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="results">
                         @if(Session::get('success'))
@@ -83,6 +83,12 @@
                             <option value="india" {{ old('inputCountry') == "india" ? 'selected' : '' }}>India</option>
                         </select>
                         <span class="text-danger">@error('inputCountry') {{ $message }} @enderror</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputImage">Profile Image</label><br>
+                        <input type="file" name="inputImage" id="inputImage" class="file-input">
+
+                        <span class="text-danger">@error('inputImage') {{ $message }} @enderror</span>
                     </div>
                     <button type="submit" class="btn btn-primary">Register</button>
                 </form>

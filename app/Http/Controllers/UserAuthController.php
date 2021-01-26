@@ -21,7 +21,8 @@ class UserAuthController extends Controller
             'email' => 'required|email|unique:teachers',
             'password' => 'required|confirmed|min:5|max:12',
             'inputAddress' => 'required',
-            'inputCountry' => 'required'
+            'inputCountry' => 'required',
+            'inputImage' => 'required|image'
         ]);
         $teacher = new Teacher;
         $teacher->first_name = $request->first_name;
@@ -31,7 +32,13 @@ class UserAuthController extends Controller
         $teacher->password = Hash::make($request->password);
         $teacher->address = $request->inputAddress;
         $teacher->country = $request->inputCountry;
-
+        if($request->hasfile('inputImage')){
+            $file = $request->file('inputImage');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move(public_path('assets/images'), $filename);
+            $teacher->image = $filename;
+        }
         $query = $teacher->save();
         if($query){
             return back()->with('success', 'You are registered Successfully');
@@ -63,6 +70,13 @@ class UserAuthController extends Controller
     function profile(){
         $user_id = session('LoggedUser');
         $user = Teacher::Where('id', $user_id)->get()->first();
-        return view('admin.profile', ['LoggedTeacherInfo' => $user, '$x' => 1]);
+        return view('admin.profile', ['LoggedTeacherInfo' => $user]);
+    }
+
+    function logout(){
+        if(session()->has('LoggedUser')){
+            session()->forget('LoggedUser');
+            return redirect('login');
+        }
     }
 }

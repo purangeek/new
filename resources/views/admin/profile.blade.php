@@ -67,7 +67,7 @@ body{
             <div class="col-lg-6" style="margin-top:50px">
                 <h2>User Profile Page</h2>
                 <hr>
-                <a class="btn btn-danger" href="{{ url('register') }}">Logout</a>
+                <a class="btn btn-danger" href="{{ url('logout') }}">Logout</a>
             </div>
         </div>
     </div>
@@ -78,7 +78,6 @@ body{
             <nav aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
                 <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                 </ol>
             </nav>
@@ -89,11 +88,11 @@ body{
                 <div class="card">
                     <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                        <img src="{{ asset('assets/images/'.$LoggedTeacherInfo->image) }}" alt="Admin" class="rounded-circle" width="150">
                         <div class="mt-3">
                         <h4>John Doe</h4>
                         <p class="text-secondary mb-1">Full Stack Developer</p>
-                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                        <p class="text-muted font-size-sm">{{ $LoggedTeacherInfo->address }}</p>
                         <button class="btn btn-primary">Follow</button>
                         <button class="btn btn-outline-primary">Message</button>
                         </div>
@@ -118,25 +117,16 @@ body{
                         <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        fip@jukmuh.al
+                        {{ $LoggedTeacherInfo->email }}
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-3">
-                        <h6 class="mb-0">Phone</h6>
+                        <h6 class="mb-0">Gender</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        (239) 816-9029
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                        <h6 class="mb-0">Mobile</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        (320) 380-4539
+                        {{ $LoggedTeacherInfo->gender }}
                         </div>
                     </div>
                     <hr>
@@ -145,7 +135,16 @@ body{
                         <h6 class="mb-0">Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        Bay Area, San Francisco, CA
+                        {{ $LoggedTeacherInfo->address }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <h6 class="mb-0">Country</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                        {{ $LoggedTeacherInfo->country }}
                         </div>
                     </div>
                     </div>
