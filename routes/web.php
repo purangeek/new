@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\ajaxData;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,7 @@ Route::post('/check', [UserAuthController::class, 'check'])->name('auth.check');
 Route::get('/profile', [UserAuthController::class, 'profile'])->middleware('isLogged');
 Route::get('/logout', [UserAuthController::class, 'logout']);
 
+
+//Get All Users Data On Page Load
+Route::get('/users', [ajaxData::class, 'index']);
+Route::POST('/users/getusers', [ajaxData::class, 'getusers']);
